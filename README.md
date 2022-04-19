@@ -1,6 +1,5 @@
-# mern-todo
-todo application built using MERN stack. 
+# Gamified Productivity Application
 
+Techstack used: MERN stack
 
-based on a tutorial:
-https://www.youtube.com/watch?v=EzF-ul6jv3U
+This project is done as a part of the Human Computer Interaction course
