@@ -150,6 +150,23 @@ app.put("/todo/:todoId", (req, res) => {
 
 app.get("/leaderboard", (req, res) => {
   console.log("in the route");
+
+  User.find({}, function (err, users) {
+    if (err)
+      return res.status(500).json({
+        title: "server error",
+        error: err,
+      });
+    var usersList = [];
+    users.forEach(function (user) {
+      usersList.push(user);
+    });
+    return res.status(200).json({
+      title: "success",
+      usersList: usersList,
+    });
+  });
+
 });
 
 // app.get('/user', (req, res) => {
