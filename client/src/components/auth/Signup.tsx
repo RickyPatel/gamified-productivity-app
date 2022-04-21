@@ -27,7 +27,7 @@ const Signup = ({ renderLogin }: SignupProps) => {
 
   return (
     <div style={{ height: "300px" }}>
-      <h1 className="text-center text-green-400 font-bold">signup</h1>
+      <h1 className="text-center text-indigo-500 font-bold">signup</h1>
       <div className="mb-4">
         <label>username</label>
         <input
@@ -60,7 +60,7 @@ const Signup = ({ renderLogin }: SignupProps) => {
           <p>
             Already a member?{" "}
             <span
-              className="text-green-400 cursor-pointer"
+              className="text-indigo-500 cursor-pointer"
               onClick={renderLogin}
             >
               Login
@@ -69,7 +69,7 @@ const Signup = ({ renderLogin }: SignupProps) => {
         </div>
         <button
           className={`rounded-lg px-6 py-3 font-bold text-white ${
-            disabled ? "bg-gray-400" : "bg-green-400"
+            disabled ? "bg-gray-400" : "bg-indigo-500"
           }`}
           disabled={disabled}
           onClick={() => onSubmit()}

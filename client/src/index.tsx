@@ -7,12 +7,14 @@ import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router";
 import RequireAuth from "./components/auth/RequireAuth";
 import Dashboard from "./pages/Dashboard";
+import LeaderBoard from "./pages/Leaderboard"
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Route path="/" component={Landing} exact />
       <Route path="/dashboard" component={RequireAuth(Dashboard)} />
+      <Route path="/leaderboard" component={LeaderBoard} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

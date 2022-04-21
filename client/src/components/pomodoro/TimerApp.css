@@ -3,6 +3,42 @@
   --green: #4aec8c;
 }
 
+body {
+  background: -moz-radial-gradient(
+    circle at 3% 25%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
+
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-radial-gradient(
+    circle at 3% 25%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
+
+  /* opera 11.10+ */
+  background: -o-radial-gradient(
+    circle at 3% 25%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
+
+  /* ie 10+ */
+  background: -ms-radial-gradient(
+    circle at 3% 25%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
+
+  /* global 92%+ browsers support */
+  background: radial-gradient(
+    circle at 3% 25%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
+}
+
 /* body{
   background-color: #30384b;
   color: #eee;
@@ -16,12 +52,14 @@ main{
 } */
 
 .timer-app {
-  background-color: #30384b;
   color: #eee;
   padding-top: 50px;
   max-width: 340px;
   margin: 0 auto;
   text-align: center;
+  border-radius: 5;
+  border: #eee;
+  margin-bottom: 50px;
 }
 
 button {

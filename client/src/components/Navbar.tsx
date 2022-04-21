@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Logout from "./auth/Logout";
 import axios from "axios";
+import Leaderboard from "./Leaderboard/Leaderboard";
 
 const Navbar = () => {
   const onLeaderboardClickHandler = () => {
     console.log("clicked");
-    axios.get("/leaderboard", {});
+    window.location.href = "/leaderboard";
   };
+  const logoClickHandler = () => {
+    window.location.href = "/dashboard";
+  };
+
   return (
-    <div className="flex justify-between bg-green-400 p-8 text-white">
-      <p className="font-bold text-lg">Mern TODO</p>
+    <div className="flex justify-between bg-indigo-500 p-8 text-white">
+      <p onClick={logoClickHandler} className="font-bold text-lg">
+        Be Productive
+      </p>
       <button className="leaderboard" onClick={onLeaderboardClickHandler}>
-        Leaderboard
+        <p>Leaderboard</p>
       </button>
       <Logout />
     </div>

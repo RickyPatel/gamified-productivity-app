@@ -1,5 +1,4 @@
 import axios from "axios";
-import TimerApp from "../pomodoro/TimerApp";
 
 export interface Todo {
   _id: string;
@@ -33,21 +32,18 @@ const TodoList = ({ todos, setTodos }: TodoListProps) => {
         .filter((todo) => !todo.isCompleted)
         .map((todo) => (
           <div
-            className="border border-gray-400 p-4 rounded-md mb-4 flex justify-between items-center"
+            className="border border-gray-400  p-4 rounded-md mb-4 flex justify-between items-center"
             key={todo._id}
           >
-            {todo.title}
+            <div className="text-white">{todo.title}</div>
             <input
               type="button"
-              className="py-2 px-3 bg-green-400 text-white rounded-md cursor-pointer"
+              className="py-2 px-3 bg-indigo-500 text-white rounded-md cursor-pointer"
               value="DONE"
               onClick={() => markCompleted(todo)}
             />
           </div>
         ))}
-      <div>
-        <TimerApp></TimerApp>
-      </div>
     </>
   );
 };
