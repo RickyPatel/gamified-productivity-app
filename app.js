@@ -12,10 +12,10 @@ require("dotenv").config();
 
 app.use(express.static(path.join(__dirname, "client", "build")));
 
-mongoose.connect(
-  "mongodb+srv://rickypatel:SmC0izE0vpukjuF1@cluster0.yhfgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-);
-// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+// mongoose.connect(
+//   "mongodb+srv://rickypatel:SmC0izE0vpukjuF1@cluster0.yhfgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+// );
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 app.use(cors());
 app.use(bodyParser.json());

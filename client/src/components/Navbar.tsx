@@ -31,17 +31,20 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between bg-indigo-500 p-8 text-white">
-      <p onClick={logoClickHandler} className="font-bold text-lg">
+      <Link to="/dashboard" className="font-bold text-lg">
         Be Productive
-      </p>
-      <Link to="/leaderboard">Leaderboard_Link</Link>
-      <button
+      </Link>
+      <Link to="/leaderboard">Leaderboard</Link>
+      {/* <p onClick={logoClickHandler} className="font-bold text-lg">
+        Be Productive
+      </p> */}
+      {/* <button
         type="reset"
         className="leaderboard"
         onClick={onLeaderboardClickHandler}
       >
         <p>Leaderboard</p>
-      </button>
+      </button> */}
       <p>Score: {score}</p>
       <p> Streak: {streak} days</p>
       <p> Level: {level}</p>
