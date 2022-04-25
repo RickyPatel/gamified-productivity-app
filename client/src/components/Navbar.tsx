@@ -9,9 +9,11 @@ const Navbar = () => {
 
   const onLeaderboardClickHandler = () => {
     window.location.href = "/leaderboard";
+    return false;
   };
   const logoClickHandler = () => {
     window.location.href = "/dashboard";
+    return false;
   };
 
   React.useEffect(() => {
