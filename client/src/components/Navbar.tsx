@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Logout from "./auth/Logout";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [score, setScore] = useState();
@@ -33,6 +34,7 @@ const Navbar = () => {
       <p onClick={logoClickHandler} className="font-bold text-lg">
         Be Productive
       </p>
+      <Link to="/leaderboard">Leaderboard_Link</Link>
       <button
         type="reset"
         className="leaderboard"
