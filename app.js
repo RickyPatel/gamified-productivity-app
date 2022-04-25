@@ -7,10 +7,16 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const Todo = require("./models/Todo");
+const path = require("path")
+require("dotenv").config()
 
-mongoose.connect(
-  "mongodb+srv://rickypatel:SmC0izE0vpukjuF1@cluster0.yhfgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-);
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+
+// mongoose.connect(
+//   "mongodb+srv://rickypatel:SmC0izE0vpukjuF1@cluster0.yhfgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+// );
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -194,6 +200,10 @@ app.get("/userdetails", (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(port, (err) => {
   if (err) return console.log(err);
