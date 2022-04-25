@@ -8,7 +8,6 @@ const Navbar = () => {
   const [level, setLevel] = useState();
 
   const onLeaderboardClickHandler = () => {
-    console.log("clicked");
     window.location.href = "/leaderboard";
   };
   const logoClickHandler = () => {
@@ -32,7 +31,11 @@ const Navbar = () => {
       <p onClick={logoClickHandler} className="font-bold text-lg">
         Be Productive
       </p>
-      <button className="leaderboard" onClick={onLeaderboardClickHandler}>
+      <button
+        type="reset"
+        className="leaderboard"
+        onClick={onLeaderboardClickHandler}
+      >
         <p>Leaderboard</p>
       </button>
       <p>Score: {score}</p>
