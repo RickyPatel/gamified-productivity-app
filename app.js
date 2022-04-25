@@ -7,16 +7,15 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const Todo = require("./models/Todo");
-const path = require("path")
-require("dotenv").config()
+const path = require("path");
+require("dotenv").config();
 
-app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname, "client", "build")));
 
-
-mongoose.connect(
-  "mongodb+srv://rickypatel:SmC0izE0vpukjuF1@cluster0.yhfgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-);
-// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+// mongoose.connect(
+//   "mongodb+srv://rickypatel:SmC0izE0vpukjuF1@cluster0.yhfgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+// );
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 app.use(cors());
 app.use(bodyParser.json());
