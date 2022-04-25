@@ -8,6 +8,7 @@ interface SignupProps {
 const Signup = ({ renderLogin }: SignupProps) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [disabled, setDisabled] = React.useState(false);
 
@@ -16,8 +17,11 @@ const Signup = ({ renderLogin }: SignupProps) => {
       .post("/signup", {
         username: username,
         password: password,
+        email: email,
       })
-      .then((res) => console.log(res));
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   React.useEffect(() => {
@@ -27,46 +31,55 @@ const Signup = ({ renderLogin }: SignupProps) => {
 
   return (
     <div style={{ height: "300px" }}>
-      <h1 className="text-center text-indigo-500 font-bold">signup</h1>
+      <h1 className="text-center text-indigo-500 font-bold">Sign Up</h1>
       <div className="mb-4">
-        <label>username</label>
+        <label className="text-white">Email</label>
+        <input
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-400 rounded-md"
+          type="email"
+          placeholder="Enter your email address"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="text-white">Username</label>
         <input
           onChange={(e) => setUsername(e.target.value)}
           className="w-full px-3 py-2 border border-gray-400 rounded-md"
           type="text"
-          placeholder="username"
+          placeholder="Enter your user name"
         />
       </div>
       <div className="mb-4">
-        <label>password</label>
+        <label className="text-white">Password</label>
         <input
           onChange={(e) => setPassword(e.target.value)}
           className="w-full px-3 py-2 border border-gray-400 rounded-md"
           type="password"
-          placeholder="password"
+          placeholder="Enter your Password"
         />
       </div>
       <div className="mb-4">
-        <label>confirm password</label>
+        <label className="text-white">Confirm Password</label>
         <input
           onChange={(e) => setConfirmPassword(e.target.value)}
           className="w-full px-3 py-2 border border-gray-400 rounded-md"
           type="password"
-          placeholder="password"
+          placeholder="Confirm your Password"
         />
       </div>
-      <div className="flex justify-between items-center">
-        <div>
-          <p>
-            Already a member?{" "}
-            <span
-              className="text-indigo-500 cursor-pointer"
-              onClick={renderLogin}
-            >
-              Login
-            </span>
-          </p>
-        </div>
+      <div>
+        <p className="text-white">
+          If you already have an account registered You can{" "}
+          <span
+            className="text-indigo-500 cursor-pointer"
+            onClick={renderLogin}
+          >
+            Login here
+          </span>
+        </p>
+      </div>
+      <div className="flex justify-between items-center my-4">
         <button
           className={`rounded-lg px-6 py-3 font-bold text-white ${
             disabled ? "bg-gray-400" : "bg-indigo-500"

@@ -20,23 +20,27 @@ app.post("/signup", (req, res) => {
   const newUser = new User({
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 10),
+    email: req.body.email,
+    score: 0,
+    level: "Beginner",
+    streak: 0,
   });
-
   newUser.save((err) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({
         title: "error",
         error: "Email already in use",
       });
     }
     return res.status(200).json({
-      title: "user successfully added",
+      title: "User successfully added",
     });
   });
 });
 
 app.post("/login", (req, res) => {
-  User.findOne({ username: req.body.username }, (err, user) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
     if (err)
       return res.status(500).json({
         title: "server error",
@@ -45,13 +49,13 @@ app.post("/login", (req, res) => {
     if (!user) {
       return res.status(400).json({
         title: "user is not found",
-        error: "invalid username or password",
+        error: "invalid email or password",
       });
     }
     if (!bcrypt.compareSync(req.body.password, user.password)) {
       return res.status(401).json({
         title: "login failed",
-        error: "invalid username or password",
+        error: "invalid email or password",
       });
     }
 
@@ -76,7 +80,6 @@ app.get("/todos", (req, res) => {
     // now we know token is valid
     Todo.find({ author: decoded.userId }, (err, todos) => {
       if (err) return console.log(err);
-
       return res.status(200).json({
         title: "success",
         todos: todos,
@@ -85,16 +88,6 @@ app.get("/todos", (req, res) => {
   });
 });
 
-// const requireToken = (req, res, next) => {
-//   jwt.verify(req.headers.token, 'secretkey', (err, decoded) => {
-//     if (err) return res.status(401).json({
-//       title: 'not authorized'
-//     });
-//   })
-//   next();
-// }
-
-// add todo route
 // mark todo as completed route
 app.post("/todo", (req, res) => {
   // verify
@@ -137,6 +130,17 @@ app.put("/todo/:todoId", (req, res) => {
         todo.save((error) => {
           if (error) return console.log(error);
 
+          User.findOneAndUpdate(
+            { _id: decoded.userId },
+            { $inc: { score: 1 } },
+            { new: true },
+            function (err, user) {
+              if (err) {
+                console.log(err);
+              }
+            }
+          );
+
           //saved
           return res.status(200).json({
             title: "success",
@@ -149,8 +153,6 @@ app.put("/todo/:todoId", (req, res) => {
 });
 
 app.get("/leaderboard", (req, res) => {
-  console.log("in the route");
-
   User.find({}, function (err, users) {
     if (err)
       return res.status(500).json({
@@ -166,29 +168,30 @@ app.get("/leaderboard", (req, res) => {
       usersList: usersList,
     });
   });
-
 });
 
-// app.get('/user', (req, res) => {
-//   let token = req.headers.token;
-//   // verify
-//   jwt.verify(token, 'secretkey', (err, decoded) => {
-//     if (err) return res.status(401).json({
-//       title: 'not authorized'
-//     });
+app.get("/userdetails", (req, res) => {
+  // console.log("user details route");
 
-//     // now we know token is valid
-//     User.findOne({ _id: decoded.userId }, (err, user) => {
-//       if (err) return console.log(err);
-//       return res.status(200).json({
-//         title: 'success',
-//         user: {
-//           username: user.username
-//         }
-//       })
-//     })
-//   })
-// })
+  jwt.verify(req.headers.token, "secretkey", (err, decoded) => {
+    if (err)
+      return res.status(401).json({
+        title: "not authorized",
+      });
+
+    User.findOne({ _id: decoded.userId }, function (err, user) {
+      if (err)
+        return res.status(500).json({
+          title: "server error",
+          error: err,
+        });
+      return res.status(200).json({
+        title: "success",
+        user: user,
+      });
+    });
+  });
+});
 
 const port = process.env.PORT || 5000;
 
